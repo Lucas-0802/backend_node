@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model Readings {
+  id String @id @default(auto()) @map("_id") @db.ObjectId 
+  user_id String
+  measure_uuid String
+  measure_datetime DateTime
+  measure_type String
+  image_url String
+  has_confirmed Boolean
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  @@map("readings")
+}
