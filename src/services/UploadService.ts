@@ -1,35 +1,68 @@
-import prismaClient from "../prisma";
+import { IUploadBody } from "../interfaces/IUploadBody";
+import { AppError } from "./AppError";
 
-export interface IcheckReading {
+export interface IRead {
+  customer_code: string;
   measure_datetime: string;
   measure_type: string;
+  measure_value: number;
+  image_url: string;
+}
+
+export interface IReadingRepository {
+  hasReading(
+    customer_code: string,
+    measure_type: string,
+    year: number,
+    month: number
+  ): Promise<boolean>;
+
+  readImage(image: string): Promise<{value: number, url: string}>;
+  insert(read: IRead): Promise<string>;
 }
 
 class UploadService {
-  async checkReading({measure_datetime, measure_type} : IcheckReading) {
+  constructor(private readingRepository: IReadingRepository) {}
+
+  async handle({
+    image,
+    customer_code,
+    measure_datetime,
+    measure_type,
+  }: IUploadBody) {
     const [year, month] = measure_datetime.split("-").map(Number);
-  
-    const readings = await prismaClient.readings.findMany({
-      where: {
-        measure_type: measure_type,
-        AND: [
-          {
-            measure_datetime: {
-              gte: new Date(year, month - 1, 1) 
-            }
-          },
-          {
-            measure_datetime: {
-              lt: new Date(year, month, 1) 
-            }
-          }
-        ]
-      }
+
+    const hasReading = await this.readingRepository.hasReading(
+      customer_code,
+      measure_type,
+      year,
+      month
+    );
+
+    if (hasReading) {
+      throw new AppError(
+        "DOUBLE REPORT",
+        "Já existe uma leitura para este tipo no mês atual",
+        409
+      );
+    }
+
+    const {value, url} = await this.readingRepository.readImage(image);
+
+    const uuid = await this.readingRepository.insert({
+      customer_code,
+      measure_datetime,
+      measure_type,
+      measure_value: value,
+      image_url : url,
     });
-  
-    return readings;
+
+    return {
+      image_url : url,
+      measure_value: value,
+      measure_uuid: uuid,
+    };
   }
-  
 }
 
 export { UploadService };

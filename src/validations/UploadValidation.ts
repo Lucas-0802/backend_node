@@ -8,6 +8,7 @@ export const uploadSchema = z.object({
       /^data:image\/(png|jpeg|jpg);base64,([a-zA-Z0-9+/=]+)$/,
       "A imagem deve estar em formato Base64"
     ),
+  customer_code: z.string().min(1, "O ID do usuário é obrigatório"),
   measure_datetime: z
     .string()
     .min(1, { message: "A data de medição é obrigatória" })
@@ -27,5 +28,10 @@ export const uploadSchema = z.object({
       },
       { message: "A data de medição é inválida" }
     ),
-  measure_type: z.string().min(1, "Tipo de medida é obrigatório"),
+  measure_type: z
+    .string()
+    .transform((val) => val.toUpperCase())
+    .refine((val) => val === "WATER" || val === "GAS", {
+      message: "O valor deve ser 'WATER' ou 'GAS'.",
+    }),
 });
