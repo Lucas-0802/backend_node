@@ -11,6 +11,7 @@ async function handleErrors(reply: FastifyReply, controllerCallback: Function) {
   try {    
     await controllerCallback();
   } catch (error) {
+    
     const { code = 'Server error', message, statusCode = 500 } = error as AppError;
     return reply.code(statusCode).send({ error_code: code, error_message: message });
   }
@@ -38,9 +39,9 @@ export async function routes(fastify: FastifyInstance) {
   );
 
   fastify.get(
-    "/{id}/list",
+    "/:customer_code/list",
     async (
-      request: FastifyRequest<{ Params: IListId }>,
+      request: FastifyRequest<{ Params: IListId; Querystring: IListQuery }>,
       reply: FastifyReply
     ) => {
       await ListController(request, reply);

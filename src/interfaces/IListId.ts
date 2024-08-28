@@ -1,3 +1,3 @@
 export interface IListId {
-    id: string;
+    customer_code: string;
 }

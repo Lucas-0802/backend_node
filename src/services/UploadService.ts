@@ -17,8 +17,12 @@ export interface IReadingRepository {
     month: number
   ): Promise<boolean>;
 
-  readImage(image: string): Promise<{value: number, url: string}>;
+  readImage(image: string): Promise<{ value: number; url: string }>;
   insert(read: IRead): Promise<string>;
+  findByUuid(uuid: string): Promise<Boolean>;
+  hasRegisteredReading(uuid: string): Promise<Boolean>;
+  confirmReading(uuid: string, confirmed_value: number): Promise<Boolean>;
+  findById(customer_code: string, measure_type: string | null): Promise<object | null>;
 }
 
 class UploadService {
@@ -47,18 +51,18 @@ class UploadService {
       );
     }
 
-    const {value, url} = await this.readingRepository.readImage(image);
+    const { value, url } = await this.readingRepository.readImage(image);
 
     const uuid = await this.readingRepository.insert({
       customer_code,
       measure_datetime,
       measure_type,
       measure_value: value,
-      image_url : url,
+      image_url: url,
     });
 
     return {
-      image_url : url,
+      image_url: url,
       measure_value: value,
       measure_uuid: uuid,
     };

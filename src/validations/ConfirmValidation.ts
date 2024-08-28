@@ -7,5 +7,5 @@ export const confirmSchema = z.object({
     confirmed_value: z
     .number()
     .int()
-    .min(1, { message: "A leitura é obrigatória" })   
+    .min(1, { message: "O valor da leitura é obrigatória" })   
 });

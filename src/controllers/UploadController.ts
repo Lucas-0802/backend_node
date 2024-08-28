@@ -7,7 +7,7 @@ import { ReadingRepository } from '../repositories/ReadingRepository';
 export async function UploadController(request: FastifyRequest<{ Body: IUploadBody }>, reply: FastifyReply) {
 
   const validationResult = uploadSchema.safeParse(request.body);
-
+ 
   if (!validationResult.success) {
     const errors = validationResult.error.errors.map(e => e.message).join(", ");
     return reply.code(400).send({ error: errors });
