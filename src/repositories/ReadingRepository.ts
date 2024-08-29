@@ -139,14 +139,14 @@ class ReadingRepository implements IReadingRepository {
     return reading.has_confirmed;
   }
 
-  async findById(customer_code: string, measure_type: string | null): Promise<object[]> {
+  async findById(customer_code: string, measure_type: string | null): Promise<object> {
     
     const whereClause: any = {
       customer_code: customer_code,
     };
   
     if (measure_type) {
-      whereClause.measure_type = measure_type;
+      whereClause.measure_type = measure_type.toUpperCase();
     }
   
     const readings = await prismaClient.readings.findMany({
