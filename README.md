@@ -64,8 +64,8 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens, desenvolvi
 
 ### 3. `GET /<customer_code>/list`
 
-**Descrição:** Lista todas as leituras de um cliente específico. Opcionalmente, filtra por tipo de leitura (WATER ou GAS).
-**Parâmetro de Query:** measure_type=WATER ou GAS (opcional).
+- **Descrição:** Lista todas as leituras de um cliente específico. Opcionalmente, filtra por tipo de leitura (WATER ou GAS).
+- **Parâmetro de Query:** measure_type=WATER ou GAS (opcional).
 
 - *200 OK:*
  ```json
