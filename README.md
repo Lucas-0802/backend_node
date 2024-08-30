@@ -85,7 +85,7 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens, desenvolvi
 - *400 Bad Request:* Tipo de medida inválido.
 - *404 Not Found:* Nenhuma leitura encontrada.
 
-## 🚀 Configuração e Instalação
+## 🛠️ Configuração e Instalação
 
 **Pré-requisitos**
 
