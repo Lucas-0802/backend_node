@@ -114,12 +114,12 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens, desenvolvi
 
 ## 🧪 Testes
 
-- * Este projeto inclui uma série de testes unitários abrangentes. Para executar os testes, use o seguinte comando:*
+ * Este projeto inclui uma série de testes unitários abrangentes. Para executar os testes, use o seguinte comando:*
  ```json
    npm test
 ```
 
-## 🤝 ContribuiçõeS
+## 🤝 Contribuições
 
- - * Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request com suas alterações.*
+  * Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request com suas alterações.*
 
