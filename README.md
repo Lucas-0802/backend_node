@@ -94,22 +94,22 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens, desenvolvi
 
 **Passos de Instalação**
 
-- ** 1. Clone o repositório:**
+-  1. Clone o repositório:
  ```json
     git clone https://github.com/seuusuario/nome-do-repositorio.git
     cd nome-do-repositorio
 ```
-- ** 2. Configure as variáveis de ambiente:**
+-  2. Configure as variáveis de ambiente:
      Crie um arquivo .env na raiz do projeto com o seguinte conteúdo
  ```json
    GEMINI_API_KEY=<sua-chave-de-api-google-gemini>
    MONGO_URI=<sua-uri-do-mongodb>
 ```
-- ** 3. Construa e execute a aplicação usando Docker Compose:**
+-  3. Construa e execute a aplicação usando Docker Compose:
  ```json
    docker-compose up --build
 ```
-- ** 4. Acesse a API:**
+-  4. Acesse a API:**
    A API estará disponível em http://localhost:3000
 
 ## 🧪 Testes
