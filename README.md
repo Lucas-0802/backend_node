@@ -100,7 +100,7 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens, desenvolvi
     cd nome-do-repositorio
 ```
 - ** 2. Configure as variáveis de ambiente:**
-    - Crie um arquivo .env na raiz do projeto com o seguinte conteúdo
+     Crie um arquivo .env na raiz do projeto com o seguinte conteúdo
  ```json
    GEMINI_API_KEY=<sua-chave-de-api-google-gemini>
    MONGO_URI=<sua-uri-do-mongodb>
@@ -110,16 +110,16 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens, desenvolvi
    docker-compose up --build
 ```
 - ** 4. Acesse a API:**
-  - A API estará disponível em http://localhost:3000
+   A API estará disponível em http://localhost:3000
 
 ## 🧪 Testes
 
- * Este projeto inclui uma série de testes unitários abrangentes. Para executar os testes, use o seguinte comando:*
+ * Este projeto inclui uma série de testes unitários abrangentes. Para executar os testes, use o seguinte comando:
  ```json
    npm test
 ```
 
 ## 🤝 Contribuições
 
-  * Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request com suas alterações.*
+  * Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request com suas alterações.
 
