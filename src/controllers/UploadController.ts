@@ -10,11 +10,9 @@ export async function UploadController(request: FastifyRequest<{ Body: IUploadBo
 
   const validationResult = uploadSchema.safeParse(request.body);
  
-  if (!validationResult.success) {
-    console.log('validationResult.error', validationResult.error);
-  
+  if (!validationResult.success) { 
     const errors = validationResult.error.errors.map(e => ({
-      error_code: e.code,
+      error_code:"INVALID_DATA",
       error_description: e.message,
     }));
   

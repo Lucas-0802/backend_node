@@ -4,16 +4,12 @@ import { confirmSchema } from "../validations/ConfirmValidation";
 import { ConfirmService } from "../services/ConfirmService";
 import { ReadingRepository } from "../repositories/ReadingRepository";
 
-
 export async function ConfirmController(request: FastifyRequest<{ Body: IConfirmBody }>, reply: FastifyReply) {
 
-    const validationResult = confirmSchema.safeParse(request.body);
-
-    if (!validationResult.success) {
-      console.log('validationResult.error', validationResult.error);
-    
+    const validationResult = confirmSchema.safeParse(request.body);  
+    if (!validationResult.success) {    
       const errors = validationResult.error.errors.map(e => ({
-        error_code: e.code,
+        error_code: "INVALID_DATA",
         error_description: e.message,
       }));
     

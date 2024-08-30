@@ -15,11 +15,13 @@ export async function ListController(
 
   const validationResult = listSchema.safeParse({ customer_code, measure_type });
 
-  if (!validationResult.success) {
-    const errors = validationResult.error.errors
-      .map((e) => e.message)
-      .join(", ");
-    return reply.code(400).send({ error: errors });
+  if (!validationResult.success) { 
+    const errors = validationResult.error.errors.map(e => ({
+      error_code: "INVALID_DATA",
+      error_description: e.message,
+    }));
+  
+    return reply.code(400).send({ errors }); 
   }
 
   const listService = new ListService(new ReadingRepository()); 
