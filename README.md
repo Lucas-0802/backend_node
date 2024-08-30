@@ -109,8 +109,8 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens. Este proje
  ```json
    docker-compose up --build
 ```
--  Acesse a API:**
-   A API estará disponível em http://localhost:3000
+-  Acesse a API:
+- A API estará disponível em http://localhost:3000
 
 ## 🧪 Testes
 
