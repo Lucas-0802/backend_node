@@ -38,6 +38,9 @@ class ReadingRepository implements IReadingRepository {
   async saveImage(image: string): Promise<string> {
     const imageName = `image-${Date.now()}.jpg`;
     const filePath = path.join("images", imageName);
+    if(!fs.existsSync('images')) {
+      await fs.promises.mkdir('images')
+    }
     const imageBuffer = Buffer.from(image, "base64");
     fs.writeFileSync(filePath, imageBuffer);
     return filePath;
