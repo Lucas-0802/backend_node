@@ -46,7 +46,7 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens. Este proje
 ```json
   {
   "measure_uuid": "string",
-  "confirmed_value": "integer"
+  "confirmed_value": 10
   }
 ```
 
