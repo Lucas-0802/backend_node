@@ -22,7 +22,7 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens, desenvolvi
     "image": "base64",
     "customer_code": "string",
     "measure_datetime": "YYYY-MM-DD",
-    "measure_type": "WATER" ou "GAS"
+    "measure_type": "WATER ou GAS"
   }
 
 - **Resposta:**
