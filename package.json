@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node build/index.js",
-    "test": "jest"
+    "start": "node build/server.js",
+    "test": "jest",
+    "prestart": "prisma generate"
   },
   "keywords": [],
   "author": "",

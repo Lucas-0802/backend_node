@@ -1,5 +1,5 @@
 import { UploadService } from '.././UploadService';
-import { IReadingRepository } from '.././UploadService';
+import { IReadingRepository } from '../../interfaces/IReadingRepository';
 import { AppError } from '.././AppError';
 import { IUploadBody } from '../../interfaces/IUploadBody';
 

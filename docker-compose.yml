@@ -2,10 +2,16 @@ version: '3'
 services:
   app:
     build: .
+    depends_on:
+      - database
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
     environment:
-      NODE_ENV: development
+      DATABASE_URL: mongodb://root:root_password@database:27017/readings?retryWrites=true&w=majority&authSource=admin
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+  database:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root_password
+      MONGO_INITDB_DATABASE: readings
