@@ -1,6 +1,6 @@
 # 🛠️ Serviço de Back-end para Gestão de Leitura de Imagens
 
-Bem-vindo ao serviço de back-end para gestão de leitura de imagens, desenvolvido como parte de um teste técnico para a Shopper.com.br. Este projeto demonstra uma API robusta que utiliza a IA do Google Gemini para ler e gerenciar leituras individuais de consumo de água e gás por meio de imagens.
+Bem-vindo ao serviço de back-end para gestão de leitura de imagens. Este projeto demonstra uma API robusta que utiliza a IA do Google Gemini para ler e gerenciar leituras individuais de consumo de água e gás por meio de imagens.
 
 ## 🚀 Funcionalidades
 
