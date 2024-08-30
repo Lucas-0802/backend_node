@@ -1,3 +1,4 @@
+import { IReadingRepository } from "../interfaces/IReadingRepository";
 import { IUploadBody } from "../interfaces/IUploadBody";
 import { AppError } from "./AppError";
 
@@ -8,23 +9,6 @@ export interface IRead {
   measure_value: number;
   image_url: string;
 }
-
-export interface IReadingRepository {
-  hasReading(
-    customer_code: string,
-    measure_type: string,
-    year: number,
-    month: number
-  ): Promise<boolean>;
-
-  readImage(image: string): Promise<{ value: number; url: string }>;
-  insert(read: IRead): Promise<string>;
-  findByUuid(uuid: string): Promise<Boolean>;
-  hasRegisteredReading(uuid: string): Promise<Boolean>;
-  confirmReading(uuid: string, confirmed_value: number): Promise<Boolean>;
-  findById(customer_code: string, measure_type: string | null): Promise<object | null>;
-}
-
 class UploadService {
   constructor(private readingRepository: IReadingRepository) {}
 
@@ -45,9 +29,9 @@ class UploadService {
 
     if (hasReading) {
       throw new AppError(
-        "DOUBLE REPORT",
-        "Já existe uma leitura para este tipo no mês atual",
-        409
+         "DOUBLE_REPORT",
+         "Leitura do mês já realizada",
+         409,
       );
     }
 

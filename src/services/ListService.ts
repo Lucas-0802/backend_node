@@ -1,5 +1,5 @@
 import { AppError } from "./AppError";
-import { IReadingRepository } from "./UploadService";
+import { IReadingRepository } from "../interfaces/IReadingRepository";
 
 class ListService {
   constructor(private readingRepository: IReadingRepository) {}

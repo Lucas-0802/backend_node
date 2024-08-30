@@ -1,37 +1,34 @@
 import { z } from "zod";
 
-export const uploadSchema = z.object({
+export const uploadSchema = z.object({    
   image: z
-    .string()
-    .min(1, "Imagem é obrigatória")
+    .string({
+      required_error: "image is required",
+      invalid_type_error: "image must be a string",
+    })
     .regex(
       /^data:image\/(png|jpeg|jpg);base64,([a-zA-Z0-9+/=]+)$/,
-      "A imagem deve estar em formato Base64"
+      "The image must be a Base64 string with a valid PNG, JPEG, or JPG format"
     ),
-  customer_code: z.string().min(1, "O ID do usuário é obrigatório"),
+    customer_code: z
+    .string({
+      required_error: "customer_code is required",
+      invalid_type_error: "customer_code must be a string",
+    }),
   measure_datetime: z
-    .string()
-    .min(1, { message: "A data de medição é obrigatória" })
-    .regex(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/, {
-      message: "A data deve estar no formato yyyy-mm-dd",
+    .string({
+      required_error: "measure_datetime is required",
+      invalid_type_error: "measure_datetime must be a string",
     })
-    .refine(
-      (date) => {
-        const [year, month, day] = date.split("-").map(Number);
-        const parsedDate = new Date(year, month - 1, day);
-
-        return (
-          parsedDate.getFullYear() === year &&
-          parsedDate.getMonth() === month - 1 &&
-          parsedDate.getDate() === day
-        );
-      },
-      { message: "A data de medição é inválida" }
-    ),
-  measure_type: z
-    .string()
+    .regex(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/, {
+      message: "Date must be in the format YYYY-MM-DD",
+    }),
+    measure_type: z
+    .string({
+      required_error: "measure_type is required"
+    })
     .transform((val) => val.toUpperCase())
     .refine((val) => val === "WATER" || val === "GAS", {
-      message: "O valor deve ser 'WATER' ou 'GAS'.",
-    }),
+      message: "measure_type must be WATER or GAS"
+    })
 });

@@ -1,11 +1,12 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { IReadingRepository } from "../services/UploadService";
+import { IReadingRepository } from "../interfaces/IReadingRepository";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 import fs from "fs";
 import path from "path";
 import prismaClient from "../prisma";
 
 class ReadingRepository implements IReadingRepository {
+  
   async hasReading(
     customer_code: string,
     measure_type: string,
@@ -155,7 +156,6 @@ class ReadingRepository implements IReadingRepository {
   
     return readings;
   }
-  
 }
 
 export { ReadingRepository };

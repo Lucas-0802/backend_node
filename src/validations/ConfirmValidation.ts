@@ -1,11 +1,12 @@
 import { z } from "zod";
 
 export const confirmSchema = z.object({
-    measure_uuid: z
-    .string()
-    .min(1, "O id da medição é obrigatório"),
-    confirmed_value: z
-    .number()
-    .int()
-    .min(1, { message: "O valor da leitura é obrigatória" })   
+  measure_uuid: z.string({
+    required_error: "measure_uuid is required",
+    invalid_type_error: "measure_uuid must be a string",
+  }),
+  confirmed_value: z.number({
+    required_error: "confirmed_value is required",
+    invalid_type_error: "confirmed_value must be a number",
+  }),
 });

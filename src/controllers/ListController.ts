@@ -3,6 +3,7 @@ import { listSchema } from "../validations/ListValidation";
 import { IListId } from "../interfaces/IListId";
 import { ReadingRepository } from "../repositories/ReadingRepository";
 import { ListService } from "../services/ListService";
+import { IListQuery } from "../interfaces/IListQuery";
 
 export async function ListController(
   request: FastifyRequest<{ Params: IListId; Querystring: IListQuery }>,

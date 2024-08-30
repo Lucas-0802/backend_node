@@ -10,8 +10,14 @@ export async function ConfirmController(request: FastifyRequest<{ Body: IConfirm
     const validationResult = confirmSchema.safeParse(request.body);
 
     if (!validationResult.success) {
-      const errors = validationResult.error.errors.map(e => e.message).join(", ");
-      return reply.code(400).send({ error: errors });
+      console.log('validationResult.error', validationResult.error);
+    
+      const errors = validationResult.error.errors.map(e => ({
+        error_code: e.code,
+        error_description: e.message,
+      }));
+    
+      return reply.code(400).send({ errors }); 
     }
 
     const { measure_uuid, confirmed_value } = validationResult.data;  
