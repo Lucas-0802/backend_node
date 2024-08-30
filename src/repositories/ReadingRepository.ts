@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { IRead, IReadingRepository } from "../services/UploadService";
+import { IReadingRepository } from "../services/UploadService";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 import fs from "fs";
 import path from "path";

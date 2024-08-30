@@ -1,4 +1,4 @@
-interface IListQuery {
+export interface IListQuery {
     measure_type?: string;
   }
   
