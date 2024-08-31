@@ -4,9 +4,7 @@ import { uploadSchema } from '../validations/UploadValidation';
 import { IUploadBody } from '../interfaces/IUploadBody';
 import { ReadingRepository } from '../repositories/ReadingRepository';
 
-export async function UploadController(request: FastifyRequest<{ Body: IUploadBody }>, reply: FastifyReply) {
-  console.log('request.body', request.body);
-  
+export async function UploadController(request: FastifyRequest<{ Body: IUploadBody }>, reply: FastifyReply) { 
 
   const validationResult = uploadSchema.safeParse(request.body);
  
