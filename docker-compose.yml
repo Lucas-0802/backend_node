@@ -1,17 +1,19 @@
 version: '3'
 services:
   app:
+    restart: on-failure
     build: .
     depends_on:
       - database
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: mongodb://root:root_password@database:27017/readings?retryWrites=true&w=majority&authSource=admin
+      DATABASE_URL: mysql://root:root_password@database:3306/readings
       GEMINI_API_KEY: ${GEMINI_API_KEY}
   database:
-    image: mongo
+    image: mysql:5.7.44
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root_password
-      MONGO_INITDB_DATABASE: readings
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: readings
+    ports:
+      - "3306:3306"

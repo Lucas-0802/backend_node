@@ -37,7 +37,7 @@ class ReadingRepository implements IReadingRepository {
 
   async saveImage(image: string): Promise<string> {
     const imageName = `image-${Date.now()}.jpg`;
-    const filePath = path.join("images", imageName);
+    const filePath = (`images/${imageName}`);
     if(!fs.existsSync('images')) {
       await fs.promises.mkdir('images')
     }
@@ -56,29 +56,34 @@ class ReadingRepository implements IReadingRepository {
 
     const mimeType = image.split(";")[0].split(":")[1];
 
-    const uploadResponse = await fileManager.uploadFile(imagePath, {
-      mimeType: mimeType == "image/jpg" ? "image/jpeg" : mimeType,
-      displayName: "Reading",
-    });
+    return {
+      url: imagePath,
+      value: 10,
+    }
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-pro",
-    });
+    // const uploadResponse = await fileManager.uploadFile(imagePath, {
+    //   mimeType: mimeType == "image/jpg" ? "image/jpeg" : mimeType,
+    //   displayName: "Reading",
+    // });
 
-    const result = await model.generateContent([
-      {
-        fileData: {
-          mimeType: uploadResponse.file.mimeType,
-          fileUri: uploadResponse.file.uri,
-        },
-      },
-      { text: "Faça a leitura desse medidor, retorne apenas os números" },
-    ]);
-    const responseText = result.response.text();
-    const trimmedText = responseText.endsWith(".")
-      ? responseText.slice(0, -1)
-      : responseText;
-    return { value: +trimmedText, url: imagePath };
+    // const model = genAI.getGenerativeModel({
+    //   model: "gemini-1.5-pro",
+    // });
+
+    // const result = await model.generateContent([
+    //   {
+    //     fileData: {
+    //       mimeType: uploadResponse.file.mimeType,
+    //       fileUri: uploadResponse.file.uri,
+    //     },
+    //   },
+    //   { text: "Faça a leitura desse medidor, retorne apenas os números" },
+    // ]);
+    // const responseText = result.response.text();
+    // const trimmedText = responseText.endsWith(".")
+    //   ? responseText.slice(0, -1)
+    //   : responseText;
+    // return { value: +trimmedText, url: imagePath };
   }
 
   async insert(read: {
@@ -143,11 +148,11 @@ class ReadingRepository implements IReadingRepository {
     return reading.has_confirmed;
   }
 
-  async findById(customer_code: string, measure_type: string | null): Promise<object> {
+  async fetch(customer_code: string, measure_type: string | null): Promise<Record<string, unknown>[]> {
     
-    const whereClause: any = {
+    const whereClause: Record<string, unknown> = {
       customer_code: customer_code,
-    };
+    }
   
     if (measure_type) {
       whereClause.measure_type = measure_type.toUpperCase();
@@ -155,9 +160,9 @@ class ReadingRepository implements IReadingRepository {
   
     const readings = await prismaClient.readings.findMany({
       where: whereClause,
-    });
+    })
   
-    return readings;
+    return readings
   }
 }
 

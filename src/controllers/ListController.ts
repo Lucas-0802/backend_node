@@ -24,7 +24,8 @@ export async function ListController(
     return reply.code(400).send({ errors }); 
   }
 
-  const listService = new ListService(new ReadingRepository()); 
+  const baseURLImages = process.env.BASE_URL_IMAGES ?? 'http://localhost:3000/'
+  const listService = new ListService(new ReadingRepository(), baseURLImages); 
 
   const result = await listService.handle( customer_code, measure_type );
 

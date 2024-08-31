@@ -21,7 +21,8 @@ export async function UploadController(request: FastifyRequest<{ Body: IUploadBo
  
   const { image, customer_code, measure_datetime, measure_type } = validationResult.data;
 
-  const uploadService = new UploadService(new ReadingRepository());
+  const baseURLImages = process.env.BASE_URL_IMAGES ?? 'http://localhost:3000/'
+  const uploadService = new UploadService(new ReadingRepository(), baseURLImages);
 
   const result = await uploadService.handle({image, customer_code, measure_datetime, measure_type})
 

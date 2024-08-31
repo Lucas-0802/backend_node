@@ -2,15 +2,15 @@ import { AppError } from "./AppError";
 import { IReadingRepository } from "../interfaces/IReadingRepository";
 
 class ListService {
-  constructor(private readingRepository: IReadingRepository) {}
+  constructor(private readingRepository: IReadingRepository, private baseUrlImage: string) {}
 
   async handle(customer_code: string, measure_type: string | null) {
-    const reading = await this.readingRepository.findById(
+    const readings = await this.readingRepository.fetch(
       customer_code,
       measure_type
     );
 
-    if ((Array.isArray(reading) && reading.length === 0) || reading === null) {
+    if (!readings.length) {
       throw new AppError(
         "MEASURES_NOT_FOUND",
         "Nenhuma leitura encontrada",
@@ -20,7 +20,7 @@ class ListService {
 
     return {
       customer_code: customer_code,
-      measures: Object.entries(reading).map(([key, value]) => {
+      measures: readings.map(value => {
         return {
           measure_uuid: value.measure_uuid,
           measure_datetime: value.measure_datetime,
@@ -28,7 +28,7 @@ class ListService {
           
           has_confirmed: value.has_confirmed,
           measure_value: value.measure_value,
-          image_url: value.image_url,
+          image_url: `${this.baseUrlImage}${value.image_url}`,
         };
       }),
     };

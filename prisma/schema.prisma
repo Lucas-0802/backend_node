@@ -3,13 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 
 model Readings {
-  measure_uuid String @id @default(auto()) @map("_id") @db.ObjectId 
+  measure_uuid String @id @default(uuid()) @map("_id")  
   customer_code String
   measure_value Float
   measure_datetime DateTime

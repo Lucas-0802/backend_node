@@ -10,7 +10,7 @@ export interface IRead {
   image_url: string;
 }
 class UploadService {
-  constructor(private readingRepository: IReadingRepository) {}
+  constructor(private readingRepository: IReadingRepository, private baseUrlImage: string) {}
 
   async handle({
     image,
@@ -46,7 +46,7 @@ class UploadService {
     });
 
     return {
-      image_url: url,
+      image_url: `${this.baseUrlImage}${url}`,
       measure_value: value,
       measure_uuid: uuid,
     };
