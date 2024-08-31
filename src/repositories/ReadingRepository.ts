@@ -2,7 +2,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IReadingRepository } from "../interfaces/IReadingRepository";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 import fs from "fs";
-import path from "path";
 import prismaClient from "../prisma";
 
 class ReadingRepository implements IReadingRepository {
@@ -56,34 +55,30 @@ class ReadingRepository implements IReadingRepository {
 
     const mimeType = image.split(";")[0].split(":")[1];
 
-    return {
-      url: imagePath,
-      value: 10,
-    }
 
-    // const uploadResponse = await fileManager.uploadFile(imagePath, {
-    //   mimeType: mimeType == "image/jpg" ? "image/jpeg" : mimeType,
-    //   displayName: "Reading",
-    // });
+    const uploadResponse = await fileManager.uploadFile(imagePath, {
+      mimeType: mimeType == "image/jpg" ? "image/jpeg" : mimeType,
+      displayName: "Reading",
+    });
 
-    // const model = genAI.getGenerativeModel({
-    //   model: "gemini-1.5-pro",
-    // });
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-pro",
+    });
 
-    // const result = await model.generateContent([
-    //   {
-    //     fileData: {
-    //       mimeType: uploadResponse.file.mimeType,
-    //       fileUri: uploadResponse.file.uri,
-    //     },
-    //   },
-    //   { text: "Faça a leitura desse medidor, retorne apenas os números" },
-    // ]);
-    // const responseText = result.response.text();
-    // const trimmedText = responseText.endsWith(".")
-    //   ? responseText.slice(0, -1)
-    //   : responseText;
-    // return { value: +trimmedText, url: imagePath };
+    const result = await model.generateContent([
+      {
+        fileData: {
+          mimeType: uploadResponse.file.mimeType,
+          fileUri: uploadResponse.file.uri,
+        },
+      },
+      { text: "Faça a leitura desse medidor, retorne apenas os números" },
+    ]);
+    const responseText = result.response.text();
+    const trimmedText = responseText.endsWith(".")
+      ? responseText.slice(0, -1)
+      : responseText;
+    return { value: +trimmedText, url: imagePath };
   }
 
   async insert(read: {
