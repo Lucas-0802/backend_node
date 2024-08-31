@@ -8,7 +8,7 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens. Este proje
 - **Operações CRUD:** Gerenciamento completo das leituras, incluindo criação, confirmação e listagem.
 - **Tratamento de Erros:** Respostas detalhadas para dados inválidos, leituras duplicadas, entre outros.
 - **Setup Dockerizado:** Facilmente implantável com Docker e Docker Compose.
-- **Banco de Dados MongoDB:** Armazenamento das leituras de medidores em um banco de dados MongoDB.
+- **Banco de Dados MySQL:** Armazenamento das leituras de medidores em um banco de dados MySQL.
 
 ## 📂 Visão Geral dos Endpoints
 
