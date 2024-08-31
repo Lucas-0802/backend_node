@@ -8,7 +8,7 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens. Este proje
 - **Operações CRUD:** Gerenciamento completo das leituras, incluindo criação, confirmação e listagem.
 - **Tratamento de Erros:** Respostas detalhadas para dados inválidos, leituras duplicadas, entre outros.
 - **Setup Dockerizado:** Facilmente implantável com Docker e Docker Compose.
-- **Banco de Dados MongoDB:** Armazenamento das leituras de medidores em um banco de dados MongoDB.
+- **Banco de Dados MySQL:** Armazenamento das leituras de medidores em um banco de dados MySQL.
 
 ## 📂 Visão Geral dos Endpoints
 
@@ -95,29 +95,21 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens. Este proje
 **Passos de Instalação**
 
 - Clone o repositório:
- ```json
+ ```shell
     git clone https://github.com/seuusuario/nome-do-repositorio.git
     cd nome-do-repositorio
 ```
 - Configure as variáveis de ambiente:
      Crie um arquivo .env na raiz do projeto com o seguinte conteúdo
- ```json
+ ```shell
    GEMINI_API_KEY=<sua-chave-de-api-google-gemini>
-   MONGO_URI=<sua-uri-do-mongodb>
 ```
 - Construa e execute a aplicação usando Docker Compose:
- ```json
+ ```shell
    docker-compose up --build
 ```
 -  Acesse a API:
 - A API estará disponível em http://localhost:3000
-
-## 🧪 Testes
-
- * Este projeto inclui uma série de testes unitários abrangentes. Para executar os testes, use o seguinte comando:
- ```json
-   npm test
-```
 
 ## 🤝 Contribuições
 
