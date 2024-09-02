@@ -90,7 +90,7 @@ Bem-vindo ao serviço de back-end para gestão de leitura de imagens. Este proje
 **Pré-requisitos**
 
 - Docker e Docker Compose instalados na sua máquina.
-- Banco de dados MongoDB configurado e em execução.
+- Banco de dados MySQL configurado e em execução.
 
 **Passos de Instalação**
 
